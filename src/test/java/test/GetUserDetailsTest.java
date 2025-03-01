@@ -17,7 +17,8 @@ public class GetUserDetailsTest extends BaseTest {
                 .then()
                 .log().all()
                 .statusCode(200)
-                .body("data.name", equalTo(FIRST_NAME));
+                .body("data.name", equalTo(FIRST_NAME))
+                .body("data.lastname", equalTo("sam"));
     }
 }
 
