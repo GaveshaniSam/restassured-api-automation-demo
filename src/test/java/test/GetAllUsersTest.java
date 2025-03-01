@@ -1,21 +1,21 @@
-import io.restassured.http.ContentType;
+package test;
+
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.empty;
 
-public class GetAllUsersTest {
+public class GetAllUsersTest extends BaseTest {
     @Test
     public void testGetAllUsers() {
-        given()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.ANY)
-                .baseUri("https://gorest.co.in")
+        given(requestSpec)
                 .log().all()
                 .when()
                 .get("/public-api/users")
                 .then()
                 .log().all()
-                .statusCode(200);
-
+                .statusCode(200)
+                .body("data", not(empty()));
     }
 }
